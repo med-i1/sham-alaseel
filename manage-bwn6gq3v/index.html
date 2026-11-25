@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>لوحة التحكم</title>
+<link rel="icon" href="../assets/img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<p class="status" id="status" role="status">بنحمّل…</p>
+
+<section class="login" id="login" hidden>
+  <h1>دخول لوحة التحكم</h1>
+  <form id="login-form">
+    <label>الإيميل
+      <input name="email" type="email" autocomplete="username" dir="ltr" required>
+    </label>
+    <label>الباسورد
+      <input name="password" type="password" autocomplete="current-password" dir="ltr" required>
+    </label>
+    <p class="error" id="login-error" role="alert"></p>
+    <button type="submit" class="btn">ادخل</button>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="top">
+    <h1>شام الأصيل</h1>
+    <div class="top-actions">
+      <a href="../" target="_blank" rel="noopener">شوف الموقع</a>
+      <button type="button" class="btn btn-plain" id="sign-out">خروج</button>
+    </div>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="أقسام لوحة التحكم">
+    <button type="button" role="tab" data-tab="orders" aria-selected="true">الطلبات <span class="badge" id="new-count" hidden></span></button>
+    <button type="button" role="tab" data-tab="reviews" aria-selected="false">التقييمات <span class="badge" id="review-count" hidden></span></button>
+    <button type="button" role="tab" data-tab="stats" aria-selected="false">الإحصائيات</button>
+    <button type="button" role="tab" data-tab="menu" aria-selected="false">المنيو</button>
+    <button type="button" role="tab" data-tab="offers" aria-selected="false">العروض</button>
+    <button type="button" role="tab" data-tab="settings" aria-selected="false">الإعدادات</button>
+  </nav>
+  <main>
+    <section data-panel="orders" id="orders"></section>
+    <section data-panel="stats" id="stats" hidden></section>
+    <section data-panel="reviews" id="reviews" hidden></section>
+    <section data-panel="menu" id="menu" hidden></section>
+    <section data-panel="offers" id="offers" hidden></section>
+    <section data-panel="settings" id="settings" hidden></section>
+  </main>
+</div>
+
+<p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+<dialog id="confirm" class="modal">
+  <form method="dialog">
+    <p id="confirm-text"></p>
+    <menu>
+      <button value="yes" class="btn" id="confirm-yes">أيوه</button>
+      <button value="no" class="btn btn-plain">لأ</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="editor" class="modal"></dialog>
+
+<script type="module" src="../assets/js/admin/auth.js"></script>
+</body>
+</html>

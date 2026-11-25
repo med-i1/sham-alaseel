@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2B705">
+<title>طلبك | شام الأصيل</title>
+<link rel="icon" href="assets/img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<p class="demo-strip" style="margin:0;padding:6px 16px;background:#231A12;color:#fff;text-align:center;font:500 14px/1.6 Tajawal,Tahoma,sans-serif">نسخة تجريبية من الموقع. زرار الطلب بيبعت على واتساب المطعم الحقيقي.</p>
+<div class="page">
+  <header class="nav">
+    <a class="brand" href="./"><img src="assets/img/logo.webp" alt="شام الأصيل" width="96" height="56"></a>
+    <div class="nav-actions"><a class="btn btn-small btn-ghost" href="./#menu">ارجع للمنيو</a></div>
+  </header>
+
+  <p class="closed-banner" data-closed role="status" hidden></p>
+
+  <main class="checkout">
+    <h1>طلبك</h1>
+
+    <div class="checkout-empty" id="cart-empty" hidden>
+      <p id="empty-text">طلبك لسه فاضي. اختار من المنيو وهتلاقيه هنا.</p>
+      <a class="btn" href="./#menu">افتح المنيو</a>
+    </div>
+
+    <div class="checkout-grid" id="checkout" hidden>
+      <section aria-label="الأصناف">
+        <ul class="lines" id="cart-lines"></ul>
+        <p class="total-row"><span>الإجمالي</span><strong data-cart-total>0 ج</strong></p>
+        <p class="hint" data-delivery-only>الإجمالي من غير مصاريف التوصيل.</p>
+        <a class="add-more" href="./#menu">أضف أصناف تانية</a>
+      </section>
+
+      <form id="order-form" novalidate>
+        <h2>بيانات الطلب</h2>
+        <fieldset class="order-type">
+          <legend>هتستلم إزاي؟</legend>
+          <label><input type="radio" name="type" value="delivery" checked> دليفري</label>
+          <label><input type="radio" name="type" value="pickup"> استلام من المطعم</label>
+        </fieldset>
+
+        <label class="field">الاسم
+          <input name="name" autocomplete="name" maxlength="60">
+          <small data-error="name"></small>
+        </label>
+        <label class="field">الموبايل
+          <input name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20">
+          <small data-error="phone"></small>
+        </label>
+        <label class="field" data-delivery-only>العنوان
+          <textarea name="address" rows="2" autocomplete="street-address" maxlength="300"></textarea>
+          <small data-error="address"></small>
+        </label>
+        <label class="field">ملاحظات (اختياري)
+          <textarea name="notes" rows="2" maxlength="300"></textarea>
+        </label>
+
+        <p class="hint" data-recording hidden>بيانات طلبك بتتسجل عند المطعم علشان يجهزه ويتواصل معاك.</p>
+        <p class="form-closed" data-closed hidden></p>
+        <button type="submit" class="btn btn-whatsapp" id="send">ابعت الطلب على الواتساب</button>
+
+        <div class="sent" id="sent" hidden>
+          <svg class="check-mark" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+          <p>فتحنا الواتساب برسالة جاهزة. <strong>اضغط «إرسال» هناك</strong> علشان طلبك يوصلنا.</p>
+          <p><a id="sent-link" target="_blank" rel="noopener">الواتساب مافتحش؟ دوس هنا</a></p>
+          <button type="button" class="link-btn" id="clear-cart">بعت الطلب، فضّي السلة</button>
+        </div>
+
+        <div class="or-call">
+          <p>أو اتصل بينا:</p>
+          <ul class="phones" data-delivery-phones></ul>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer footer-slim">
+    <p data-address>٧أ شارع الخمسين، أمام سنترال الفسطاط بجوار رنين</p>
+    <p data-hours>مفتوح 24 ساعة</p>
+  </footer>
+</div>
+
+<p class="toast" id="toast" role="status" aria-live="polite"></p>
+<noscript><p class="noscript">علشان تكمّل الطلب فعّل الجافاسكريبت، أو كلمنا على 01227788425.</p></noscript>
+<script type="module" src="assets/js/order.js"></script>
+</body>
+</html>

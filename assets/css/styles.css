@@ -1,0 +1,421 @@
+:root {
+  --yellow: #F2B705;
+  --wine: #8B0F14;
+  --red: #D62828;
+  --green: #2E7D32;
+  --white: #FFFFFF;
+  --cream: #FFF7E6;
+  --ink: #231A12;
+  --muted: #6E6259;
+  --line: #EFE4CF;
+  --radius: 18px;
+  --display: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+  --body: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  /* الإطار الأصفر فوق والكريمي تحت زي التصميم المرجعي */
+  background: linear-gradient(var(--yellow) 0 560px, var(--cream) 560px);
+  background-color: var(--cream);
+}
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.55; margin: 0; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; margin-bottom: 20px; }
+h2::after { content: ''; display: block; width: 40px; height: 5px; border-radius: 3px; background: var(--wine); margin-top: 4px; }
+a { color: var(--wine); }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; inset-inline-start: 8px; top: -60px; background: var(--white); padding: 8px 14px; border-radius: 8px; z-index: 50; }
+.skip:focus { top: 8px; }
+
+.page {
+  max-width: 1160px;
+  margin: 24px auto 40px;
+  background: var(--white);
+  border-radius: 28px;
+  box-shadow: 0 30px 60px -30px rgba(90, 50, 0, .35);
+}
+
+/* ---------- الأزرار ---------- */
+.btn {
+  display: inline-block;
+  background: var(--wine);
+  color: var(--white);
+  border: 2px solid var(--wine);
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-family: var(--display);
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+}
+.btn:hover { background: #6f0b10; border-color: #6f0b10; }
+.btn-ghost { background: transparent; color: var(--wine); }
+.btn-ghost:hover { background: var(--cream); border-color: var(--wine); }
+.btn-small { padding: 6px 18px; font-size: .95rem; }
+.btn-whatsapp { width: 100%; background: var(--green); border-color: var(--green); padding-block: 14px; }
+.btn-whatsapp:hover { background: #245f27; border-color: #245f27; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.link-btn { background: none; border: 0; padding: 0; color: var(--wine); text-decoration: underline; }
+.icon-btn { background: var(--cream); border: 0; border-radius: 50%; width: 40px; height: 40px; }
+
+/* ---------- الشريط العلوي ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px var(--gutter);
+  background: var(--white);
+  border-radius: 28px 28px 0 0;
+  border-bottom: 1px solid var(--line);
+}
+.brand img { height: 56px; width: auto; }
+.nav nav { display: flex; gap: 26px; margin-inline: auto; }
+.nav nav a { color: var(--ink); text-decoration: none; font-weight: 500; }
+.nav nav a:hover { color: var(--wine); text-decoration: underline; text-underline-offset: 6px; }
+.nav-actions { display: flex; align-items: center; gap: 10px; margin-inline-start: auto; }
+.cart-btn { position: relative; background: none; border: 0; padding: 8px; display: grid; place-items: center; }
+.cart-badge {
+  position: absolute; top: 0; inset-inline-end: 0;
+  min-width: 20px; height: 20px; padding-inline: 5px;
+  border-radius: 10px; background: var(--red); color: var(--white);
+  font-size: .75rem; font-weight: 700; line-height: 20px; text-align: center;
+}
+.cart-badge.bump { animation: bump .35s ease-out; }
+@keyframes bump { 50% { transform: scale(1.45); } }
+
+.closed-banner { margin: 0; padding: 12px var(--gutter); background: var(--red); color: var(--white); font-weight: 700; text-align: center; }
+
+/* ---------- الواجهة ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 28px var(--gutter) 44px;
+  overflow: clip;
+}
+.hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); font-weight: 900; line-height: 1.5; }
+.hero-text p { margin-block: 10px 0; }
+.hero-text p { max-width: 34ch; font-size: 1.15rem; color: var(--muted); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 22px; }
+.hero-text .open-note { display: flex; align-items: center; gap: 8px; color: var(--green); font-weight: 700; font-size: 1rem; margin: 0; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(46, 125, 50, .18); }
+.hero-art { position: relative; display: grid; place-items: center; aspect-ratio: 1.08; }
+.hero-circle { position: absolute; height: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--yellow); }
+.hero-art img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  rotate: -8deg;
+  filter: drop-shadow(0 26px 18px rgba(60, 25, 0, .32));
+  animation: land .9s cubic-bezier(.2, .8, .2, 1) both;
+}
+@keyframes land { from { transform: translateY(-28px) scale(.96); } }
+
+/* ---------- المميز والعروض ---------- */
+.showcase { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr); gap: 32px; padding: 8px var(--gutter) 40px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.card { display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px -12px rgba(70, 40, 0, .28); }
+.card-body { display: flex; flex-direction: column; flex: 1; gap: 6px; padding: 14px 16px 16px; }
+.card h3 { font-size: 1.1rem; font-weight: 800; }
+.card p { margin: 0; color: var(--muted); font-size: .95rem; }
+.card .prices { margin-top: auto; padding-top: 6px; }
+
+.side { display: flex; flex-direction: column; gap: 28px; border-inline-start: 1px solid var(--line); padding-inline-start: 28px; }
+.offers { display: flex; flex-direction: column; gap: 16px; }
+.offer { background: var(--yellow); border-radius: var(--radius); overflow: hidden; text-align: center; padding-bottom: 14px; }
+.offer img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.offer h3 { padding: 10px 12px 0; font-size: 1.1rem; }
+.offer .offer-price { margin: 8px 0 10px; font-family: var(--display); font-weight: 900; font-size: 1.9rem; color: var(--wine); line-height: 1.3; }
+.offer button { background: var(--white); border: 0; border-radius: 999px; padding: 8px 30px; font-family: var(--display); font-weight: 800; color: var(--wine); }
+.offer button:hover { background: var(--cream); }
+/* أول عرض بصورة، الباقي من غيرها علشان مانكررش نفس الصورة */
+.offer + .offer { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'title title' 'price action'; align-items: center; text-align: start; padding: 14px 16px; gap: 12px; }
+.offer + .offer img { display: none; }
+.offer + .offer h3 { grid-area: title; padding: 0; font-size: 1.05rem; line-height: 1.5; }
+.offer + .offer .offer-price { grid-area: price; margin: 0; font-size: 1.5rem; }
+.offer + .offer button { grid-area: action; padding-inline: 20px; white-space: nowrap; }
+
+.new-card { display: block; border-radius: var(--radius); overflow: hidden; background: var(--wine); color: var(--white); text-decoration: none; text-align: center; padding-bottom: 16px; }
+.new-card img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 12px; }
+.new-card strong { display: block; font-family: var(--display); font-weight: 900; font-size: 1.35rem; }
+.new-card span { font-size: .95rem; }
+
+/* ---------- أزرار الأسعار ---------- */
+.prices { display: flex; flex-wrap: wrap; gap: 8px; }
+.price {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cream); border: 1.5px solid var(--line); border-radius: 12px;
+  padding: 5px 10px 5px 8px; line-height: 1.3;
+}
+.price small { color: var(--muted); font-size: .8rem; }
+.price b { font-family: var(--display); font-weight: 800; color: var(--wine); white-space: nowrap; }
+.price .plus { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--wine); color: var(--white); font-weight: 700; line-height: 1; }
+button.price:hover { border-color: var(--wine); }
+.tag { display: inline-block; border-radius: 999px; padding: 3px 12px; font-size: .88rem; font-weight: 700; background: var(--cream); color: var(--muted); text-decoration: none; }
+a.tag { color: var(--wine); text-decoration: underline; }
+.tag-out { background: #FBE9E9; color: var(--red); }
+
+/* ---------- المنيو ---------- */
+.menu { padding: 36px var(--gutter); border-top: 1px solid var(--line); }
+.menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.search { flex: 0 1 340px; }
+.search input { width: 100%; border: 2px solid var(--line); border-radius: 999px; padding: 10px 18px; background: var(--white); }
+.search input:focus { border-color: var(--wine); outline: none; }
+.tabs { position: sticky; top: 77px; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0; background: var(--white); }
+.tab { flex: none; border: 2px solid var(--line); background: var(--white); border-radius: 999px; padding: 4px 14px; font-family: var(--display); font-weight: 700; font-size: .95rem; }
+.tab[aria-selected="true"] { background: var(--wine); border-color: var(--wine); color: var(--white); }
+.category { margin-top: 16px; }
+.category-head { position: relative; display: flex; align-items: center; gap: 16px; background: var(--yellow); border-radius: var(--radius); padding: 12px 16px; }
+.category-head img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); }
+.category-head h3 { font-size: 1.5rem; font-weight: 900; }
+.group { margin-top: 22px; }
+.group > h4 { margin: 0 0 4px; font-family: var(--display); font-size: 1.1rem; line-height: 1.6; color: var(--wine); }
+.items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 36px; }
+.item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.item-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.item h5 { margin: 0; font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.item p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.item.sold-out h5 { color: var(--muted); }
+.no-results { color: var(--muted); padding: 24px 0; }
+
+/* ---------- من نحن والاتصال ---------- */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding: 40px var(--gutter); background: var(--cream); }
+.about p { max-width: 52ch; }
+.address { font-weight: 700; }
+.about-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.map { width: 100%; height: 320px; border: 0; border-radius: var(--radius); background: var(--line); }
+.contact { padding: 40px var(--gutter); }
+.contact > p { margin: 8px 0; }
+.phones { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
+.phones a { display: inline-block; direction: ltr; border: 2px solid var(--wine); border-radius: 999px; padding: 5px 18px; font-weight: 700; text-decoration: none; font-variant-numeric: tabular-nums; }
+.phones a:hover { background: var(--wine); color: var(--white); }
+
+.footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding: 32px var(--gutter); background: var(--wine); color: var(--white); border-radius: 0 0 28px 28px; }
+.footer img { height: 70px; width: auto; align-self: start; background: var(--white); border-radius: 14px; padding: 6px 10px; }
+.footer p { margin: 0 0 8px; }
+.footer a { color: var(--white); }
+.footer .phones { flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.footer .phones a { border: 0; padding: 0; }
+.footer .phones a:hover { background: none; text-decoration: underline; }
+.footer-links { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- أزرار عامة للسلة ---------- */
+.cart-bar { display: none; }
+.toast {
+  position: fixed; inset-inline: 0; bottom: 24px; z-index: 40;
+  width: max-content; max-width: calc(100vw - 32px); margin: 0 auto; padding: 8px 20px;
+  background: var(--ink); color: var(--white); border-radius: 18px; text-align: center;
+  opacity: 0; visibility: hidden; translate: 0 12px; transition: opacity .2s, visibility .2s, translate .2s;
+}
+.toast.show { opacity: 1; visibility: visible; translate: 0 0; }
+.stepper { display: flex; align-items: center; gap: 8px; }
+.stepper button { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--wine); background: var(--white); color: var(--wine); font-weight: 700; line-height: 1; }
+.stepper button:active { background: var(--wine); color: var(--white); }
+.stepper output { min-width: 1.6em; text-align: center; font-weight: 700; }
+
+/* ---------- المنتج: الضغط والوقوف عليه ---------- */
+[data-open] { cursor: pointer; }
+.item-name { background: none; border: 0; padding: 0; text-align: start; font: inherit; color: inherit; }
+.card-media, .item-media { position: relative; overflow: hidden; }
+.card-media img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.more { position: absolute; inset-inline: 0; bottom: 0; padding: 18px 12px 10px; background: linear-gradient(transparent, rgba(35, 26, 18, .8)); color: var(--white); font-weight: 700; text-align: center; translate: 0 101%; transition: translate .3s; }
+.card { transition: translate .3s, box-shadow .3s; }
+.card:hover, .card:focus-within { translate: 0 -6px; box-shadow: 0 22px 40px -16px rgba(70, 40, 0, .4); }
+.card:hover .card-media img, .card:focus-within .card-media img { transform: scale(1.07); }
+.card:hover .more, .card:focus-within .more { translate: 0 0; }
+.item p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.item-media { flex: none; width: 96px; height: 96px; border-radius: 16px; background: var(--cream); }
+.item-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.item { transition: background-color .2s; border-radius: 12px; padding-inline: 8px; }
+.item:hover { background: var(--cream); }
+.item:hover .item-media img { transform: scale(1.12) rotate(-2deg); }
+.item:hover .item-name, .card:hover .item-name { color: var(--wine); }
+
+/* ---------- نافذة المنتج ---------- */
+.product { width: min(520px, calc(100vw - 24px)); max-height: min(92vh, 920px); padding: 0; border: 0; border-radius: 24px; background: var(--white); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
+.product::backdrop { background: rgba(35, 26, 18, .6); }
+.product[open] { animation: pop .34s cubic-bezier(.2, .9, .25, 1); }
+@keyframes pop { from { opacity: 0; transform: translateY(40px) scale(.94); } }
+.product-close { position: sticky; top: 10px; float: left; margin: 10px 0 -50px 10px; z-index: 2; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); background: var(--white); }
+.product-media { position: relative; background: var(--cream); }
+.product-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.product-body { padding: 16px 22px 24px; }
+.product-cat { margin: 0; color: var(--muted); font-size: .9rem; }
+.product h2 { margin: 0 0 6px; font-size: 1.6rem; line-height: 1.45; }
+.product h2::after { content: none; }
+.product-desc { margin: 0 0 14px; }
+.sizes { border: 0; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sizes legend { padding: 0; margin-bottom: 8px; font-weight: 700; }
+.size { display: flex; align-items: center; gap: 8px; border: 2px solid var(--line); border-radius: 14px; padding: 8px 14px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.size:has(input:checked) { border-color: var(--wine); background: var(--cream); }
+.size b { color: var(--wine); font-family: var(--display); white-space: nowrap; }
+.single-price { margin: 0 0 12px; font-family: var(--display); font-weight: 900; font-size: 1.6rem; color: var(--wine); }
+.product-qty { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-weight: 700; }
+.btn-wide { display: block; width: 100%; margin-top: 8px; padding-block: 12px; }
+.product-ask p { margin: 0 0 10px; }
+
+/* ---------- التقييمات ---------- */
+.reviews { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 14px; }
+.reviews h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.stars { color: var(--yellow); letter-spacing: 2px; direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
+.stars-off { color: var(--line); }
+.review-summary { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; }
+.review-summary strong { font-family: var(--display); font-size: 1.6rem; }
+.review-list ul { list-style: none; margin: 0 0 12px; padding: 0; }
+.review-list li { padding: 10px 0; border-bottom: 1px dashed var(--line); overflow-wrap: anywhere; }
+.review-list li div { display: flex; justify-content: space-between; gap: 10px; }
+.review-list li p { margin: 4px 0 0; }
+.star-input { border: 0; margin: 0; padding: 0; direction: ltr; display: flex; flex-flow: row-reverse wrap; justify-content: flex-end; }
+.star-input legend { float: left; width: 100%; direction: rtl; font-weight: 700; padding: 0; }
+.star-input input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.star-input label { font-size: 2rem; line-height: 1.2; padding: 0 3px; color: #D9CBB0; cursor: pointer; transition: transform .15s, color .15s; }
+.star-input label:hover { transform: scale(1.2); }
+.star-input input:checked ~ label, .star-input label:hover, .star-input label:hover ~ label { color: var(--yellow); }
+.star-input input:focus-visible + label { outline: 3px solid var(--ink); border-radius: 6px; }
+.review-form .error { color: var(--red); font-weight: 700; margin: 6px 0; }
+.review-form .error:empty { margin: 0; }
+.review-done { background: #EAF5EB; border-radius: 12px; padding: 10px 14px; font-weight: 700; }
+
+/* ---------- صفحة الطلب ---------- */
+input[type="radio"] { accent-color: var(--wine); }
+.checkout { padding: 28px var(--gutter) 48px; }
+.checkout h1 { font-size: 2rem; font-weight: 900; margin-bottom: 18px; }
+.checkout h2 { font-size: 1.3rem; margin-bottom: 8px; }
+.checkout h2::after { content: none; }
+.checkout-empty { text-align: center; padding: 48px 0; }
+.checkout-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+.lines { list-style: none; margin: 0 0 14px; padding: 0; }
+.line { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; grid-template-areas: 'thumb name total' 'thumb qty remove'; align-items: center; gap: 8px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.line-thumb { grid-area: thumb; width: 72px; height: 72px; object-fit: cover; border-radius: 14px; }
+.line-name { grid-area: name; line-height: 1.5; font-weight: 700; overflow-wrap: anywhere; }
+.line-name small { display: block; color: var(--muted); font-weight: 400; }
+.line-total { grid-area: total; text-align: end; font-weight: 700; white-space: nowrap; }
+.line .stepper { grid-area: qty; }
+.line-remove { grid-area: remove; justify-self: end; }
+.total-row { display: flex; justify-content: space-between; gap: 12px; margin: 16px 0 4px; font-size: 1.35rem; font-family: var(--display); font-weight: 900; }
+.total-row strong.bump { animation: bump .35s ease-out; }
+.add-more { display: inline-block; margin-top: 8px; font-weight: 700; }
+#order-form { background: var(--cream); border-radius: var(--radius); padding: 20px; }
+.order-type { border: 0; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.order-type legend { font-weight: 700; margin-bottom: 6px; padding: 0; }
+.field { display: block; font-weight: 700; margin-top: 14px; }
+.field input, .field textarea { display: block; width: 100%; margin-top: 4px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; font-weight: 400; resize: vertical; background: var(--white); }
+.field input[type="tel"] { text-align: right; }
+.field [aria-invalid="true"] { border-color: var(--red); }
+.field small { display: block; color: var(--red); font-weight: 500; }
+.hint { color: var(--muted); font-size: .9rem; margin-block: 10px; }
+.form-closed { background: #FBE9E9; color: var(--red); border-radius: 12px; padding: 10px 12px; font-weight: 700; }
+#order-form .btn-whatsapp { margin-top: 14px; }
+.sent { margin-top: 14px; padding: 14px 16px; background: #EAF5EB; border-radius: 12px; text-align: center; animation: pop .34s cubic-bezier(.2, .9, .25, 1); }
+.sent p { margin: 0 0 8px; }
+.check-mark { width: 56px; height: 56px; margin: 0 auto 8px; fill: none; stroke: var(--green); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.check-mark circle { stroke-dasharray: 151; animation: draw .6s ease-out both; }
+.check-mark path { stroke-dasharray: 40; animation: tick .4s .5s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 151; } to { stroke-dashoffset: 0; } }
+@keyframes tick { from { stroke-dashoffset: 40; opacity: 0; } to { stroke-dashoffset: 0; } }
+.or-call { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 8px; }
+.noscript { text-align: center; padding: 16px; background: var(--white); }
+.footer-slim { justify-content: center; text-align: center; padding-block: 20px; }
+.footer-slim p { margin: 0; }
+
+/* ---------- حقوق الصور ---------- */
+.credits { padding: 28px var(--gutter) 48px; }
+.credits ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 14px; }
+.credits li { display: flex; gap: 12px; align-items: center; overflow-wrap: anywhere; line-height: 1.5; font-size: .92rem; }
+.credits img { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex: none; }
+
+/* ---------- حركات الواجهة ---------- */
+.will-reveal { opacity: 0; }
+.fly { position: fixed; z-index: 60; border-radius: 50%; object-fit: cover; pointer-events: none; box-shadow: 0 10px 24px rgba(0, 0, 0, .3); }
+.cart-bar.bump { animation: nudge .45s ease-out; }
+@keyframes nudge { 40% { transform: scale(1.04) translateY(-4px); } }
+.hero-circle { animation: grow .8s cubic-bezier(.2, .9, .25, 1) both; }
+.hero-circle::after { content: ''; position: absolute; inset: -14px; border-radius: 50%; border: 3px dashed rgba(139, 15, 20, .35); animation: spin 40s linear infinite; }
+@keyframes grow { from { transform: scale(.6); opacity: 0; } }
+@keyframes spin { to { rotate: 360deg; } }
+.hero-art img { animation: land .9s .15s cubic-bezier(.2, .8, .2, 1) both, float 5.5s 1.1s ease-in-out infinite; }
+@keyframes float { 50% { translate: 0 -14px; } }
+.hero-text > * { animation: rise .7s cubic-bezier(.2, .8, .2, 1) both; }
+.hero-text > :nth-child(2) { animation-delay: .1s; }
+.hero-text > :nth-child(3) { animation-delay: .2s; }
+.hero-text > :nth-child(4) { animation-delay: .3s; }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); } }
+.dot { animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, .45); } 70%, 100% { box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); } }
+.btn { transition: transform .15s, background-color .2s, border-color .2s; }
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: scale(.97); }
+.price { transition: transform .15s, border-color .2s; }
+button.price:hover { transform: translateY(-2px); }
+button.price:active { transform: scale(.95); }
+.tab { transition: background-color .2s, color .2s, border-color .2s, transform .15s; }
+.tab:hover { transform: translateY(-2px); }
+.new-card { overflow: hidden; }
+.new-card img { transition: transform .6s; }
+.new-card:hover img { transform: scale(1.05); }
+
+/* ---------- الشاشات الأصغر ---------- */
+@media (max-width: 960px) {
+  .nav nav { display: none; }
+  .hero-art img { width: 90%; }
+  .checkout-grid { grid-template-columns: 1fr; }
+  .showcase { grid-template-columns: 1fr; }
+  .side { border: 0; padding: 0; }
+  .items { grid-template-columns: 1fr; }
+  .new-card img { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 680px) {
+  body { background: linear-gradient(var(--yellow) 0 120px, var(--cream) 120px) var(--cream); padding-bottom: 76px; }
+  .page { margin: 0; border-radius: 0; }
+  .nav { border-radius: 0; }
+  .nav-actions .btn { display: none; }
+  .brand img { height: 48px; }
+  .tabs { top: 69px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  .hero { grid-template-columns: 1fr; text-align: center; padding-top: 12px; padding-bottom: 28px; }
+  .hero-art { order: -1; width: min(100%, 380px); margin-inline: auto; }
+  .hero-text p { margin-inline: auto; }
+  .hero-actions, .hero-text .open-note { justify-content: center; }
+  .hero-text .open-note { max-width: none; }
+  .cards { gap: 12px; }
+  .card-body { padding: 10px 10px 12px; }
+  .card h3 { font-size: 1rem; }
+  .card p { display: none; }
+  .card .prices { flex-direction: column; }
+  .card .price { justify-content: space-between; }
+  .about { grid-template-columns: 1fr; }
+  .footer { border-radius: 0; flex-direction: column; }
+  .footer img { align-self: flex-start; }
+  .toast { bottom: 88px; }
+  .item-media { width: 84px; height: 84px; }
+  .product { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 24px 24px 0 0; }
+  .cart-bar {
+    display: flex; justify-content: space-between; align-items: center; text-decoration: none;
+    position: fixed; inset-inline: 12px; bottom: 12px; z-index: 30;
+    background: var(--wine); color: var(--white); border: 0; border-radius: 999px;
+    padding: 14px 22px; font-family: var(--display); font-weight: 800;
+    box-shadow: 0 12px 28px -8px rgba(60, 0, 0, .55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .will-reveal { opacity: 1; }
+}
