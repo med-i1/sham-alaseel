@@ -1,0 +1,93 @@
+rules_version = '2';
+
+// أي حاجة مش مكتوبة هنا مرفوضة
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // الأدمن هو اللي ليه مستند admins/{uid} (بيتضاف يدوي من Firebase console)
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function shortText(value, max) {
+      return value is string && value.size() <= max;
+    }
+
+    // نفس الحدود اللي في public/assets/js/cart.js
+    function validOrder(order) {
+      let fields = ['createdAt', 'status', 'type', 'name', 'phone', 'address', 'notes', 'lines', 'total'];
+      return order.keys().hasOnly(fields)
+        && order.keys().hasAll(fields)
+        && order.createdAt == request.time
+        && order.status == 'new'
+        && order.type in ['delivery', 'pickup']
+        && shortText(order.name, 60) && order.name.size() >= 2
+        && order.phone is string && order.phone.matches('01[0125][0-9]{8}')
+        && shortText(order.address, 300)
+        && (order.type == 'pickup' || order.address.size() >= 3)
+        && shortText(order.notes, 300)
+        && order.lines is list && order.lines.size() >= 1 && order.lines.size() <= 50
+        && order.total is int && order.total >= 0 && order.total <= 1000000;
+    }
+
+    // نفس الحدود اللي في public/assets/js/reviews.js
+    function validReview(review) {
+      let fields = ['createdAt', 'itemId', 'itemName', 'stars', 'name', 'comment', 'approved'];
+      return review.keys().hasOnly(fields)
+        && review.keys().hasAll(fields)
+        && review.createdAt == request.time
+        && review.approved == false
+        && review.stars is int && review.stars >= 1 && review.stars <= 5
+        && shortText(review.name, 40) && review.name.size() >= 2
+        && shortText(review.comment, 300)
+        && shortText(review.itemId, 60) && review.itemId.size() >= 1
+        && shortText(review.itemName, 100);
+    }
+
+    match /menu/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /site/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // صور مصغرة (أقل من 200KB، يعني حوالي 280 ألف حرف base64)
+    match /images/{imageId} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['data'])
+        && shortText(request.resource.data.data, 280000);
+      allow delete: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      // الزائر يضيف بس
+      allow create: if validOrder(request.resource.data);
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+        && request.resource.data.status in ['new', 'confirmed', 'delivered', 'cancelled'];
+    }
+
+    // تقييمات الزباين: أي حد يبعت، ومحدش يشوفها غير بعد موافقة الأدمن
+    match /reviews/{reviewId} {
+      allow read: if resource.data.approved == true || isAdmin();
+      allow create: if validReview(request.resource.data);
+      // الأدمن يوافق أو يخفي بس، ومايغيرش كلام الزبون
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['approved'])
+        && request.resource.data.approved is bool;
+      allow delete: if isAdmin();
+    }
+
+    // كل واحد يقرأ مستنده بس (علشان الداشبورد تعرف هو أدمن ولا لأ)، ومحدش يكتب
+    match /admins/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}

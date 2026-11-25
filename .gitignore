@@ -1,0 +1,7 @@
+node_modules/
+.tools/
+.superpowers/
+.firebase/
+*-debug.log
+.claude/
+.demo*/

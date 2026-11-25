@@ -1,0 +1,16 @@
+{
+  "name": "sham-alaseel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:rules": "node scripts/emulator.mjs exec \"node --test tests/rules/rules.test.js\"",
+    "emulators": "node scripts/emulator.mjs start",
+    "seed": "node scripts/seed-upload.mjs"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "firebase": "^13.4.0",
+    "firebase-tools": "^15.37.0"
+  }
+}
